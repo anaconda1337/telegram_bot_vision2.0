@@ -7,7 +7,7 @@ List of all functions:
 More functions will be added below.
 []
 
-Example of how the "Vision" works.
+Example of how "Vision" works.
 
 ![image](https://user-images.githubusercontent.com/86983649/132085177-cd622de5-8803-4a10-b2cc-9d4e48ab39a7.png)
 
