@@ -13,7 +13,6 @@ Basic Echobot example, repeats messages.
 Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
-from secrets import token_urlsafe
 import pygsheets
 import random
 import time
@@ -27,6 +26,9 @@ from telegram import update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 import sys
+import gtts
+import playsound as sound
+
 
 gc = pygsheets.authorize(service_file='D:\\actual projects\\telegram_bot_vision2.0\\telegram_bot_vision2.0\\client_secret_pygsheet.json')
 TOKEN = ('1901516841:AAEe0PXhD962So1JtSS9qUPUppPc_lALRTs')
@@ -45,6 +47,14 @@ logger = logging.getLogger(__name__)
 counter_var = 0
 domain_tld = ('.com', '.bg', '.org', '.info', '.net',)
 
+
+def text_repeater(update, context):
+    start = timer()
+    counter(update, context)
+    test = gtts.gTTS(update.message.text.lower())
+    test.save("test.mp3")
+    sound.playsound("test.mp3")
+    
 
 def hello(update, context):
     start = timer()
@@ -155,6 +165,10 @@ def save_data(metric_name, metric_value):
 def echo(update, context):
     """Echo the user message."""
     print(f'User with ID: {update.message.from_user.id} has executed a function')
+
+    if update.message.text.endswith("repeat"):
+        text_repeater(update, context)
+        return
 
     if update.message.text.lower() == 'hi':
         hello(update, context)
