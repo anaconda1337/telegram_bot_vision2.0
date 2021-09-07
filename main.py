@@ -50,13 +50,6 @@ counter_var = 0
 domain_tld = ('.com', '.bg', '.org', '.info', '.net',)
 
 
-def text_repeater(update, context):
-    start = timer()
-    counter(update, context)
-    test = gtts.gTTS(update.message.text.lower())
-    test.save("test.mp3")
-    sound.playsound("test.mp3")
-
 def hello(update, context):
     start = timer()
     counter(update, context)
@@ -166,10 +159,6 @@ def save_data(metric_name, metric_value):
 def echo(update, context):
     """Echo the user message."""
     print(f'User with ID: {update.message.from_user.id} has executed a function')
-
-    if update.message.text.endswith("repeat"):
-        text_repeater(update, context)
-        return
 
     if update.message.text.lower() == 'hi':
         hello(update, context)

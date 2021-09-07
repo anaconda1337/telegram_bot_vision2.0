@@ -3,5 +3,3 @@ python-telegram-bot==0.0.1
 geocoder==1.38.1
 pyjokes==0.6.0
 pygsheets==2.0.5
-gtTS
-playsound
