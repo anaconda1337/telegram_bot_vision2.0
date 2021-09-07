@@ -27,7 +27,9 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 import sys
 import gtts
+import multiprocessing
 import playsound as sound
+
 
 
 gc = pygsheets.authorize(service_file='D:\\actual projects\\telegram_bot_vision2.0\\telegram_bot_vision2.0\\client_secret_pygsheet.json')
@@ -54,7 +56,6 @@ def text_repeater(update, context):
     test = gtts.gTTS(update.message.text.lower())
     test.save("test.mp3")
     sound.playsound("test.mp3")
-    
 
 def hello(update, context):
     start = timer()
