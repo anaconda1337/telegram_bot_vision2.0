@@ -13,6 +13,7 @@ Basic Echobot example, repeats messages.
 Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
+from secrets import token_urlsafe
 import pygsheets
 import random
 import time
@@ -26,10 +27,9 @@ from telegram import update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 import sys
-from token import token
 
-gc = pygsheets.authorize(service_file='C:\\Users\\RYZEN\\PycharmProjects\\telegram_bot_vision\\client_secret_257557703924-kkgrv3hgh03ferhh21jl2rhrgvtrhlg4.apps.googleusercontent.com.json')
-TOKEN = (token)
+gc = pygsheets.authorize(service_file='D:\\actual projects\\telegram_bot_vision2.0\\telegram_bot_vision2.0\\client_secret_pygsheet.json')
+TOKEN = ('1901516841:AAEe0PXhD962So1JtSS9qUPUppPc_lALRTs')
 DEBUG_MODE = True
 
 # Enable logging
