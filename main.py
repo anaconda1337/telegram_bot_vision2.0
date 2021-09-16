@@ -26,13 +26,9 @@ from telegram import update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 import sys
-import gtts
-import multiprocessing
-import playsound as sound
 
 
-
-gc = pygsheets.authorize(service_file='D:\\actual projects\\telegram_bot_vision2.0\\telegram_bot_vision2.0\\client_secret_pygsheet.json')
+gc = pygsheets.authorize(service_file='P:\\Python-Telegram-Bot-Vision\\telegram_bot_vision2.0\\visionoff-e20942ef65d0.json')
 TOKEN = ('1901516841:AAEe0PXhD962So1JtSS9qUPUppPc_lALRTs')
 DEBUG_MODE = True
 
@@ -131,7 +127,7 @@ def counter(update, context):
     global counter_var
     counter_var += 1
     print(f'Functions counter is: {counter_var}')
-    sh = gc.open('Vision')
+    sh = gc.open('THEVISION')
     wks = sh[0]
     wks.update_value("E2", counter_var)
 
@@ -147,7 +143,7 @@ def stop_timer(start_time, end_time):
     today = date.today()
     current_date = today.strftime("%d/%m/%Y")
     print('-------------------------------------------------------------------')
-    sh = gc.open('Vision')
+    sh = gc.open('THEVISION')
     wks = sh[0]
     wks.insert_rows(row=1, number=1, values=[time_delta, parent_function, current_time, current_date])
 
