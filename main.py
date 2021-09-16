@@ -29,7 +29,7 @@ import sys
 
 
 gc = pygsheets.authorize(service_file='P:\\Python-Telegram-Bot-Vision\\telegram_bot_vision2.0\\visionoff-e20942ef65d0.json')
-TOKEN = ('token')
+TOKEN = ('1901516841:AAEe0PXhD962So1JtSS9qUPUppPc_lALRTs')
 DEBUG_MODE = True
 
 # Enable logging
