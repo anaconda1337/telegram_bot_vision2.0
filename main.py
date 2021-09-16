@@ -182,7 +182,7 @@ def echo(update, context, lengh=None):
     """Echo the user message."""
     print(f'User with ID: {update.message.from_user.id} has executed a function')
 
-    if update.message.text.lower() == "password" or update.message.text.lower() == "password3":
+    if update.message.text.lower() == "password" or update.message.text.lower() == "pass3":
         password(update, context, 3)
         update.message.reply_text("If you want to specified the length of password generated, add a digit index after. "
                                   "for example: password3, will generated a 9 digit password. Because there are 3 "
