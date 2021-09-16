@@ -41,9 +41,34 @@ logger = logging.getLogger(__name__)
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 
-
 counter_var = 0
 domain_tld = ('.com', '.bg', '.org', '.info', '.net',)
+
+
+def password(update, context, lengh):
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+               'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+    pick = []
+
+    for i in range(1, lengh + 1):
+        pick.append(random.choice(letters))
+    for i in range(1, lengh + 1):
+        pick.append(random.choice(numbers))
+    for i in range(1, lengh + 1):
+        pick.append(random.choice(symbols))
+
+    random.shuffle(pick)
+    pick_final = ""
+    for char in pick:
+        pick_final += char
+    # print(pick_final)
+    # print(pick)
+    len_pass = len(pick_final)
+    update.message.reply_text(pick_final)
+    update.message.reply_text(f"Length of this password is: {len_pass} digits.")
 
 
 def hello(update, context):
@@ -60,7 +85,8 @@ def help(update, context):
     update.message.reply_text("""
     Vision can do:
     - hi - greetings;
-    - help - commands list.
+    - help - commands list;
+    - password - generate random password;
     - check - tasks counter;
     - execute url (example: google.com)
     - time - it shows current date & time;
@@ -152,9 +178,27 @@ def save_data(metric_name, metric_value):
     return True
 
 
-def echo(update, context):
+def echo(update, context, lengh=None):
     """Echo the user message."""
     print(f'User with ID: {update.message.from_user.id} has executed a function')
+
+    if update.message.text.lower() == "password" or update.message.text.lower() == "password3":
+        password(update, context, 3)
+        update.message.reply_text("If you want to specified the length of password generated, add a digit index after. "
+                                  "for example: password3, will generated a 9 digit password. Because there are 3 "
+                                  "types of symbols, which are multiplied by your digit given. \npass3 / "
+                                  "pass5 "
+                                  "/ pass8 / pass12 are available options. Have fun!")
+        return
+    elif update.message.text.lower() == "pass5":
+        password(update, context, 5)
+        return
+    elif update.message.text.lower() == "pass8":
+        password(update, context, 8)
+        return
+    elif update.message.text.lower() == "pass12":
+        password(update, context, 12)
+        return
 
     if update.message.text.lower() == 'hi':
         hello(update, context)
