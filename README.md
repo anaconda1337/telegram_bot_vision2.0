@@ -5,6 +5,7 @@ List of all functions:
 ![image](https://user-images.githubusercontent.com/86983649/132084709-bea7a0d5-f2a7-49b6-83d6-e7161d4407e7.png)
 
 More functions will be added below.
+
 [Added random password generator containing all letters, number & symbols.
 ]
 
