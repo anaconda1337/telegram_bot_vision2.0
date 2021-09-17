@@ -29,7 +29,7 @@ import sys
 
 
 gc = pygsheets.authorize(service_file='P:\\Python-Telegram-Bot-Vision\\telegram_bot_vision2.0\\visionoff-e20942ef65d0.json')
-TOKEN = ('1901516841:AAEe0PXhD962So1JtSS9qUPUppPc_lALRTs')
+TOKEN = ('token')
 DEBUG_MODE = True
 
 # Enable logging
@@ -43,9 +43,22 @@ logger = logging.getLogger(__name__)
 
 counter_var = 0
 domain_tld = ('.com', '.bg', '.org', '.info', '.net',)
+numb = ""
+
+
+def password_correct(update, context):
+    global numb
+    numb += str(update.message.text)[-1:]
+    print(numb)
+    numbs_icek = int(numb)
+    numb = ""
+    password(update, context, numbs_icek)
+    return
 
 
 def password(update, context, lengh):
+    start = timer()
+    counter(update, context)
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
                'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
                'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -69,6 +82,7 @@ def password(update, context, lengh):
     len_pass = len(pick_final)
     update.message.reply_text(pick_final)
     update.message.reply_text(f"Length of this password is: {len_pass} digits.")
+    stop_timer(start, timer())
 
 
 def hello(update, context):
@@ -182,23 +196,33 @@ def echo(update, context, lengh=None):
     """Echo the user message."""
     print(f'User with ID: {update.message.from_user.id} has executed a function')
 
-    if update.message.text.lower() == "password" or update.message.text.lower() == "pass3":
-        password(update, context, 3)
-        update.message.reply_text("If you want to specified the length of password generated, add a digit index after. "
-                                  "for example: password3, will generated a 9 digit password. Because there are 3 "
-                                  "types of symbols, which are multiplied by your digit given. \npass3 / "
-                                  "pass5 "
-                                  "/ pass8 / pass12 are available options. Have fun!")
+    if update.message.text.startswith("sword"):
+        password_correct(update, context)
         return
-    elif update.message.text.lower() == "pass5":
-        password(update, context, 5)
+
+    if update.message.text.lower() == "password":
+        password(update, context, 4)
+        update.message.reply_text('If you want to specified the length of password generated, Type sword and add a '
+                                  'digit index after. For example: sword1-9 will produce password with max length of '
+                                  '27 digits.')
         return
-    elif update.message.text.lower() == "pass8":
-        password(update, context, 8)
-        return
-    elif update.message.text.lower() == "pass12":
-        password(update, context, 12)
-        return
+    # if update.message.text.lower() == "password" or update.message.text.lower() == "pass3":
+    #     password(update, context, 3)
+    #     update.message.reply_text("If you want to specified the length of password generated, add a digit index after. "
+    #                               "for example: password3, will generated a 9 digit password. Because there are 3 "
+    #                               "types of symbols, which are multiplied by your digit given. \npass3 / "
+    #                               "pass5 "
+    #                               "/ pass8 / pass12 are available options. Have fun!")
+    #     return
+    # elif update.message.text.lower() == "pass5":
+    #     password(update, context, 5)
+    #     return
+    # elif update.message.text.lower() == "pass8":
+    #     password(update, context, 8)
+    #     return
+    # elif update.message.text.lower() == "pass12":
+    #     password(update, context, 12)
+    #     return
 
     if update.message.text.lower() == 'hi':
         hello(update, context)
@@ -231,7 +255,7 @@ def echo(update, context, lengh=None):
     else:
         update.message.reply_text(f"""Unknown command: {update.message.text}
 You also may be unauthorised user.""")
-        update.message.reply_text("input your 4 digits key: ****")
+        # update.message.reply_text("input your 4 digits key: ****")
         print("unauthorised user")
 
 
